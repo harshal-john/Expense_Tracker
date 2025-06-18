@@ -16,5 +16,16 @@ public class ExpenseManager {
         // Add the expense to the list
         expenses.add(e);
     }
+
+    public void viewAllExpenses(){
+        if (expenses.isEmpty()) {
+            System.out.println("No Expenses found. ");
+            return;
+        }
+        for (Expense e : expenses) {
+            System.out.println(e);
+        }
+    }
+        
 }
 
