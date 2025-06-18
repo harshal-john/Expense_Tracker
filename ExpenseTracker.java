@@ -64,6 +64,14 @@ public class ExpenseTracker {
                     manager.viewAllExpenses();
                     break;
                 }
+                
+                // Total amount by category
+                case 3 -> {
+                    System.out.println("Category to total : ");
+                    String category = scanner.nextLine();
+                    manager.totalByCategory(category);
+                    break;
+                }
                 default -> {
 
                     break;
