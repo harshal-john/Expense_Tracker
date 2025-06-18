@@ -1,4 +1,7 @@
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
@@ -70,6 +73,25 @@ public class ExpenseManager {
             for (Expense e : expenses) {
                 bw.write(e.getCategory() + " ," + e.getAmount() + " ,"+ e.getDate());
                 bw.newLine();
+            }
+        }
+    }
+
+    // Method to load data from file 
+    public void loadFormFile(String filename) throws IOException {
+        expenses.clear();
+        File file = new File(filename);
+        if(!file.exists()) return;
+        try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                String[] parts = line.split(",")
+                if (parts.length == 3) {
+                    String cat = parts[0];
+                    double amt = Double.parseDouble(parts[1]);
+                    LocalDate date = LocalDate.parse(parts[2]);
+                    addExpense(cat, amt, date);
+                }
             }
         }
     }
