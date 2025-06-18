@@ -84,7 +84,7 @@ public class ExpenseManager {
 
     // Method to save file
     public void saveToFile(String filename) throws IOException {
-        try (BufferedWriter bw = new BufferedWriter(new FileWriter(filename))) {
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(filename,true))) {
             for (Expense e : expenses) {
                 bw.write(e.getCategory() + "," + e.getAmount() + "," + e.getDate());
                 bw.newLine();
@@ -94,7 +94,6 @@ public class ExpenseManager {
 
     // Method to load data from file
     public void loadFromFile(String filename) throws IOException {
-        expenses.clear();
         File file = new File(filename);
         if (!file.exists())
             return;
