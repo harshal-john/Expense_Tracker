@@ -1,4 +1,6 @@
-# 💸 Expense Tracker (Java Console App)
+# 💸 Expense Tracker (JavaFX MVC Refactor)
+
+**Note:** This project is being refactored to use JavaFX with an MVC structure. The main entry point will move to a JavaFX Application class in the controllers package.
 
 A beginner-friendly Java project to help you track your daily expenses, categorized and saved to a text file. Built with core Java features like `ArrayList`, `LocalDate`, file I/O, and method overloading.
 

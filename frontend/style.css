@@ -1,0 +1,133 @@
+body {
+    background: #f4f6f8;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 400px;
+    margin: 40px auto;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    padding: 24px 18px 32px 18px;
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 24px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 24px;
+}
+
+input, button {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+}
+
+button {
+    background: #1976d2;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+button:hover {
+    background: #1565c0;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #fafbfc;
+}
+th, td {
+    padding: 8px 6px;
+    text-align: left;
+}
+th {
+    background: #e3eaf2;
+    color: #333;
+}
+tr:nth-child(even) {
+    background: #f4f6f8;
+}
+
+@media (max-width: 500px) {
+    .container {
+        max-width: 98vw;
+        padding: 10px 2vw 20px 2vw;
+    }
+    table, thead, tbody, th, td, tr {
+        display: block;
+    }
+    th, td {
+        padding: 8px 2px;
+    }
+    th {
+        background: #e3eaf2;
+    }
+    tr {
+        margin-bottom: 10px;
+    }
+}
+
+.controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 18px;
+    justify-content: center;
+}
+.controls input, .controls select, .controls button {
+    flex: 1 1 120px;
+    min-width: 100px;
+    max-width: 180px;
+}
+.analytics {
+    margin-bottom: 18px;
+    background: #f0f4fa;
+    border-radius: 6px;
+    padding: 10px 8px;
+    font-size: 1rem;
+    color: #222;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+.actions-btn {
+    background: #e53935;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 5px 10px;
+    margin: 0 2px;
+    cursor: pointer;
+    font-size: 0.95em;
+    transition: background 0.2s;
+}
+.actions-btn.edit {
+    background: #43a047;
+}
+.actions-btn:hover {
+    opacity: 0.85;
+}
+@media (max-width: 500px) {
+    .controls {
+        flex-direction: column;
+        gap: 6px;
+    }
+    .analytics {
+        font-size: 0.95rem;
+        padding: 6px 2vw;
+    }
+} 
