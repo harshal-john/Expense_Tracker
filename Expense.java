@@ -11,4 +11,9 @@ public class Expense {
         this.amount = amount;
         this.date = date;
     }
+
+    // Methods to invoke items
+    public String getCatagory() { return catagory;}
+    public String getamount() { return catagory;}
+    public String getdate() { return catagory;}
 }
