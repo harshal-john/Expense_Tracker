@@ -64,7 +64,7 @@ public class ExpenseManager {
         if (total == 0) {
             System.out.println("No expenses found for category: " + category);
         } else {
-            System.out.println("Total amount in " + category + " is \u20B9" + total);
+            System.out.println("Total amount in " + category + " is Rs. " + total);
         }
     }
 

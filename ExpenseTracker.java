@@ -95,7 +95,7 @@ public class ExpenseTracker {
                     }catch(Exception e){
                         System.out.println("Failed to save the file. ");
                     }
-                    break;
+                    return;
                 }
 
                 // Default statement 
