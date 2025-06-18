@@ -46,6 +46,6 @@ public class Expense {
     // Override toString() to print the values
     @Override
     public String toString() {
-        return date + " | " + category + " | ₹" + amount;
+        return date + " | " + category + " | \u20B9" + amount;
     }
 }
