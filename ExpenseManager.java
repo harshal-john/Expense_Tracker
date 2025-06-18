@@ -41,4 +41,15 @@ public class ExpenseManager {
         }
     }
 
+    // Method to total the amount by category
+    public void totalByCategory(String  category){
+        double total = 0;
+        for (Expense e : expenses) {
+            if (e.getCategory().equalsIgnoreCase(category)) {
+                total += e.getAmount();
+            }
+        }
+        System.out.println("Total amount in " + category + " is \u20B9" + total);
+    }
+
 }
