@@ -8,6 +8,7 @@ public class Expense {
 
     // Public Init Method
     public Expense(String category, double amount, LocalDate date) {
+        if (amount < 0) throw new IllegalArgumentException("Amount cannot be negative.");
         this.category = category;
         this.amount = amount;
         this.date = date;
@@ -17,16 +18,19 @@ public class Expense {
 
     // Constructor with default category
     public Expense(double amount, LocalDate date) {
+        if (amount < 0) throw new IllegalArgumentException("Amount cannot be negative.");
         this("Miscellaneous", amount, date);
     }
 
     // Constructor with default date
     public Expense(String category, double amount) {
+        if (amount < 0) throw new IllegalArgumentException("Amount cannot be negative.");
         this(category, amount, LocalDate.now());
     }
 
     // Constructor with default category and date
     public Expense(double amount) {
+        if (amount < 0) throw new IllegalArgumentException("Amount cannot be negative.");
         this("Miscellaneous", amount, LocalDate.now());
     }
 

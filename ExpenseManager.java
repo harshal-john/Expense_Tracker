@@ -10,10 +10,10 @@ import java.util.List;
 
 /**
  * ExpenseManager manages a list of expenses and provides functionalities
- * like adding, viewing, filtering, totaling, saving to file, and loading from file.
+ * like adding, viewing, filtering, totaling, saving to file, and loading from
+ * file.
  */
 
- 
 // Class to manage a list of expenses
 public class ExpenseManager {
 
@@ -54,40 +54,50 @@ public class ExpenseManager {
     }
 
     // Method to total the amount by category
-    public void totalByCategory(String  category){
+    public void totalByCategory(String category) {
         double total = 0;
         for (Expense e : expenses) {
             if (e.getCategory().equalsIgnoreCase(category)) {
                 total += e.getAmount();
             }
         }
-        System.out.println("Total amount in " + category + " is \u20B9" + total);
-    }
-
-    // Method to filter Expenses by month
-    public void filterByMonth(int month){
-        for (Expense e : expenses) {
-            if (e.getDate().getMonthValue() == month) {
-                System.out.println(e);
-            }
+        if (total == 0) {
+            System.out.println("No expenses found for category: " + category);
+        } else {
+            System.out.println("Total amount in " + category + " is \u20B9" + total);
         }
     }
 
-    // Method to save file 
+    // Method to filter Expenses by month
+    public void filterByMonth(int month) {
+        boolean found = false;
+        for (Expense e : expenses) {
+            if (e.getDate().getMonthValue() == month) {
+                System.out.println(e);
+                found = true;
+            }
+        }
+        if (!found) {
+            System.out.println("No expenses found for month: " + month);
+        }
+    }
+
+    // Method to save file
     public void saveToFile(String filename) throws IOException {
-        try(BufferedWriter bw = new BufferedWriter(new FileWriter(filename))) {
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(filename))) {
             for (Expense e : expenses) {
-                bw.write(e.getCategory() + " ," + e.getAmount() + " ,"+ e.getDate());
+                bw.write(e.getCategory() + "," + e.getAmount() + "," + e.getDate());
                 bw.newLine();
             }
         }
     }
 
-    // Method to load data from file 
-    public void loadFormFile(String filename) throws IOException {
+    // Method to load data from file
+    public void loadFromFile(String filename) throws IOException {
         expenses.clear();
         File file = new File(filename);
-        if(!file.exists()) return;
+        if (!file.exists())
+            return;
         try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
             String line;
             while ((line = br.readLine()) != null) {

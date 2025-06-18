@@ -1,4 +1,5 @@
 import java.time.LocalDate;
+import java.time.Month;
 import java.util.Scanner;
 
 public class ExpenseTracker {
@@ -10,7 +11,7 @@ public class ExpenseTracker {
         ExpenseManager manager = new ExpenseManager();
 
         try {
-            manager.loadFormFile("expense.txt");
+            manager.loadFromFile("expense.txt");
         } catch (Exception e) {
             System.out.println("No previous data found Exception : " + e);
         }
@@ -39,8 +40,9 @@ public class ExpenseTracker {
                     String category = scanner.nextLine();
                     System.out.println("Amount : ");
                     double amount = scanner.nextDouble();
+                    scanner.nextLine();
                     System.out.println("Date (yyyy-mm-dd) : ");
-                    String dateStr = scanner.next();
+                    String dateStr = scanner.nextLine();
 
                     // Check for deault parameter
                     boolean hasCategory = !category.isBlank();
@@ -56,6 +58,8 @@ public class ExpenseTracker {
                     } else {
                         manager.addExpense(amount); // default category & date
                     }
+
+                    System.out.println("Expense added successfully!");
                     break;
                 }
 
@@ -78,6 +82,8 @@ public class ExpenseTracker {
                     System.out.println("Enter the month (1-12) to filter: ");
                     int month = scanner.nextInt();
                     manager.filterByMonth(month);
+
+                    System.out.println("Expenses in " + Month.of(month) + ":");
                     break;
                 }
 
@@ -93,7 +99,7 @@ public class ExpenseTracker {
                 }
 
                 // Default statement 
-                default -> System.out.println("Invaild Choice please enter choices (1 - 5)");
+                default -> System.out.println("Invalid choice. Please enter a number between 1 and 5.");
             }
         }
     }
