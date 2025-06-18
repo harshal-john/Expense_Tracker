@@ -1,5 +1,6 @@
 import java.time.LocalDate;
 
+/* This is a Expense class used as the structure of the inputs i.e. Expenses in .txt format */
 public class Expense {
     private String category;
     private double amount;
