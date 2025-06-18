@@ -8,6 +8,12 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * ExpenseManager manages a list of expenses and provides functionalities
+ * like adding, viewing, filtering, totaling, saving to file, and loading from file.
+ */
+
+ 
 // Class to manage a list of expenses
 public class ExpenseManager {
 
@@ -85,7 +91,7 @@ public class ExpenseManager {
         try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
             String line;
             while ((line = br.readLine()) != null) {
-                String[] parts = line.split(",")
+                String[] parts = line.split(",");
                 if (parts.length == 3) {
                     String cat = parts[0];
                     double amt = Double.parseDouble(parts[1]);
