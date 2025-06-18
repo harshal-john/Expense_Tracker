@@ -1,3 +1,6 @@
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -57,6 +60,16 @@ public class ExpenseManager {
         for (Expense e : expenses) {
             if (e.getDate().getMonthValue() == month) {
                 System.out.println(e);
+            }
+        }
+    }
+
+    // Method to save file 
+    public void saveToFile(String filename) throws IOException {
+        try(BufferedWriter bw = new BufferedWriter(new FileWriter(filename))) {
+            for (Expense e : expenses) {
+                bw.write(e.getCategory() + " ," + e.getAmount() + " ,"+ e.getDate());
+                bw.newLine();
             }
         }
     }
