@@ -78,10 +78,16 @@ public class ExpenseTracker {
                     manager.filterByMonth(month);
                     break;
                 }
-                default -> {
-
+                case 5 -> {
+                    try{
+                        manager.saveToFile("expense.txt");
+                        System.out.println("Saved... \nExiting...");
+                    }catch(Exception e){
+                        System.out.println("Failed to save the file. ");
+                    }
                     break;
                 }
+                default -> System.out.println("Invaild Choice please enter choices (1 - 5)");
             }
         }
     }
