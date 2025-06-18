@@ -72,12 +72,16 @@ public class ExpenseTracker {
                     manager.totalByCategory(category);
                     break;
                 }
+
+                // Filter by month
                 case 4 -> {
                     System.out.println("Enter the month (1-12) to filter: ");
                     int month = scanner.nextInt();
                     manager.filterByMonth(month);
                     break;
                 }
+
+                // Save file and exiting
                 case 5 -> {
                     try{
                         manager.saveToFile("expense.txt");
@@ -87,6 +91,8 @@ public class ExpenseTracker {
                     }
                     break;
                 }
+
+                // Default statement 
                 default -> System.out.println("Invaild Choice please enter choices (1 - 5)");
             }
         }
