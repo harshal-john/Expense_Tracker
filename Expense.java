@@ -31,15 +31,15 @@ public class Expense {
     }
 
     // Methods to invoke items
-    public String getcategory() {
+    public String getCategory() {
         return category;
     }
 
-    public double getamount() {
+    public double getAmount() {
         return amount;
     }
 
-    public LocalDate getdate() {
+    public LocalDate getDate() {
         return date;
     }
 
