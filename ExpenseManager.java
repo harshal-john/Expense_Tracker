@@ -17,7 +17,21 @@ public class ExpenseManager {
         expenses.add(e);
     }
 
-    public void viewAllExpenses(){
+    // Overloading the method for Default parameters
+    public void addExpense(double amount, LocalDate date) {
+        expenses.add(new Expense(amount, date));
+    }
+
+    public void addExpense(String category, double amount) {
+        expenses.add(new Expense(category, amount));
+    }
+
+    public void addExpense(double amount) {
+        expenses.add(new Expense(amount));
+    }
+
+    // Method to view all Expenses
+    public void viewAllExpenses() {
         if (expenses.isEmpty()) {
             System.out.println("No Expenses found. ");
             return;
@@ -26,6 +40,5 @@ public class ExpenseManager {
             System.out.println(e);
         }
     }
-        
-}
 
+}
