@@ -52,4 +52,13 @@ public class ExpenseManager {
         System.out.println("Total amount in " + category + " is \u20B9" + total);
     }
 
+    // Method to filter Expenses by month
+    public void filterByMonth(int month){
+        for (Expense e : expenses) {
+            if (e.getDate().getMonthValue() == month) {
+                System.out.println(e);
+            }
+        }
+    }
+
 }
