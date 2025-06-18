@@ -30,7 +30,10 @@ public class ExpenseTracker {
             int choice = scanner.nextInt();
             scanner.nextLine();
 
+            // switch case for displaying options
             switch (choice) {
+
+                // case 1 -> Add Expenses
                 case 1 -> {
                     System.out.println("Category : ");
                     String category = scanner.nextLine();
@@ -53,6 +56,12 @@ public class ExpenseTracker {
                     } else {
                         manager.addExpense(amount); // default category & date
                     }
+                    break;
+                }
+
+                // view all Expenses
+                case 2 -> {
+                    manager.viewAllExpenses();
                     break;
                 }
                 default -> {
