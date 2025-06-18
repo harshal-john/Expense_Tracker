@@ -72,6 +72,12 @@ public class ExpenseTracker {
                     manager.totalByCategory(category);
                     break;
                 }
+                case 4 -> {
+                    System.out.println("Enter the month (1-12) to filter: ");
+                    int month = scanner.nextInt();
+                    manager.filterByMonth(month);
+                    break;
+                }
                 default -> {
 
                     break;
