@@ -107,10 +107,12 @@ exportBtn.addEventListener('click', () => {
 
 form.addEventListener('submit', function(e) {
     e.preventDefault();
-    const category = document.getElementById('category').value.trim();
+    let category = document.getElementById('category').value.trim();
     const amount = parseFloat(document.getElementById('amount').value);
-    const date = document.getElementById('date').value;
-    if (!category || isNaN(amount) || !date) return;
+    let date = document.getElementById('date').value;
+    if (!category) category = 'Malicious';
+    if (!date) date = new Date().toISOString().slice(0,10);
+    if (isNaN(amount)) return;
     expenses.push({ category, amount: parseFloat(amount.toFixed(2)), date });
     form.reset();
     localStorage.setItem('expenses', JSON.stringify(expenses));

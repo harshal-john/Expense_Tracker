@@ -3,15 +3,21 @@ body {
     font-family: 'Segoe UI', Arial, sans-serif;
     margin: 0;
     padding: 0;
+    overflow: hidden;
 }
 
 .container {
     max-width: 1000px;
-    margin: 40px auto;
+    height: calc(100vh - 0.1em);
+    margin: 0 auto;
     background: #fff;
     border-radius: 10px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-    padding: 24px 18px 32px 18px;
+    padding: 0 18px 18px 18px;
+    overflow: hidden;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
 }
 
 h1 {
@@ -151,14 +157,23 @@ tr:nth-child(even) {
     color: #388e3c;
 }
 
-.file-section {
-    margin: 24px 0 12px 0;
-    padding: 14px 10px;
-    background: #f7fafd;
-    border-radius: 8px;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.03);
-    text-align: center;
+.right-panel > .file-section {
+    margin-top: 20px;
+    width: 100%;
+    box-sizing: border-box;
 }
+
+.file-section {
+    background: #f7fafd;
+    border-radius: 10px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+    text-align: center;
+    padding: 14px 10px;
+    box-sizing: border-box;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
 .file-section h2 {
     font-size: 1.1em;
     margin-bottom: 10px;
@@ -173,7 +188,9 @@ tr:nth-child(even) {
 .main-content {
     display: flex;
     gap: 32px;
-    min-height: 600px;
+    flex: 1 1 0;
+    min-height: 0;
+    overflow: hidden;
 }
 
 .left-panel {
@@ -182,6 +199,8 @@ tr:nth-child(even) {
     display: flex;
     flex-direction: column;
     gap: 18px;
+    min-width: 0;
+    overflow: visible;
 }
 
 .right-panel {
@@ -189,23 +208,32 @@ tr:nth-child(even) {
     min-width: 0;
     display: flex;
     flex-direction: column;
-    max-height: 700px;
+    overflow: visible;
+    padding-top: 8px;
 }
 
 .right-panel table {
-    flex: 1 1 auto;
-    overflow-y: auto;
+    width: 100%;
     display: block;
-    max-height: 650px;
 }
 
-.right-panel thead, .right-panel tbody {
+.right-panel thead {
     display: block;
+    width: 100%;
+    position: sticky;
+    top: 0;
+    background: #e3eaf2;
+    z-index: 2;
 }
 
 .right-panel tbody {
     overflow-y: auto;
-    max-height: 600px;
+    flex: 1 1 0;
+    min-height: 0;
+    max-height: none;
+    height: 100%;
+    display: block;
+    width: 100%;
 }
 
 .right-panel th, .right-panel td {
@@ -214,12 +242,20 @@ tr:nth-child(even) {
 }
 
 @media (max-width: 900px) {
+    .container {
+        height: auto;
+        min-height: 0;
+    }
     .main-content {
         flex-direction: column;
         gap: 16px;
+        height: auto;
+        min-height: 0;
     }
     .left-panel, .right-panel {
         max-width: 100%;
+        min-width: 0;
+        max-height: none;
     }
     .right-panel table, .right-panel thead, .right-panel tbody, .right-panel th, .right-panel td {
         display: block;
@@ -227,5 +263,204 @@ tr:nth-child(even) {
     }
     .right-panel tbody {
         max-height: 300px;
+    }
+    .sticky-header, .sticky-form {
+        position: static;
+        box-shadow: none;
+    }
+    .left-panel > * {
+        margin-top: 14px;
+    }
+    .right-panel > .file-section {
+        margin-top: 16px;
+        width: 100%;
+    }
+}
+
+.section-title {
+    font-size: 1.15em;
+    font-weight: 600;
+    margin-bottom: 12px;
+    color: #1976d2;
+    letter-spacing: 0.5px;
+}
+
+.left-panel > * {
+    margin-top: 20px;
+    margin-bottom: 0;
+}
+
+.filters-card {
+    background: #f7fafd;
+    border-radius: 10px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+    padding: 18px 14px 14px 14px;
+    margin-top: 20px;
+    margin-bottom: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    border: 1px solid #e3eaf2;
+}
+
+.filters-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.filter-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 0;
+}
+.filter-row label {
+    min-width: 90px;
+    font-weight: 500;
+    color: #1976d2;
+}
+.date-range-group, .amount-range-group {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.filter-actions {
+    justify-content: flex-start;
+    gap: 10px;
+}
+
+.total-section {
+    background: #f7fafd;
+    border-radius: 10px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+    padding: 14px 10px;
+    margin-top: 20px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.right-panel > .file-section {
+    margin-top: 20px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.file-section {
+    background: #f7fafd;
+    border-radius: 10px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+    text-align: center;
+    padding: 14px 10px;
+    box-sizing: border-box;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.left-panel > * {
+    margin-top: 20px;
+    margin-bottom: 0;
+}
+
+.right-panel > * {
+    margin-top: 20px;
+    margin-bottom: 0;
+}
+
+@media (max-width: 900px) {
+    .filters-card, .total-section, .right-panel > .file-section {
+        margin-top: 16px;
+        width: 100%;
+    }
+    .section-heading {
+        font-size: 1.08em;
+        padding: 8px;
+    }
+    .table-container {
+        max-height: 200px;
+    }
+}
+
+.section-heading {
+    font-size: 1.2rem;
+    font-weight: bold;
+    padding: 10px;
+    background-color: #f0f8ff;
+    border-left: 4px solid #007bff;
+    margin-bottom: 10px;
+}
+
+.right-panel > .section-heading {
+    position: relative;
+    z-index: 2;
+    background: #f0f8ff;
+    margin-bottom: 14px;
+    margin-top: 0;
+}
+
+.table-container {
+    max-height: 300px;
+    overflow-y: auto;
+    border: 1px solid #ccc;
+    margin-top: 0;
+    padding-top: 0;
+    background: #fff;
+    border-radius: 8px;
+}
+
+.sticky-header {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    background: #1976d2;
+    color: #fff;
+    z-index: 100;
+    text-align: center;
+    padding: 0.3em 0 0.2em 0;
+    box-shadow: 0 2px 8px rgba(25,118,210,0.08);
+}
+.sticky-header h1 {
+    margin: 0;
+    font-size: 2em;
+    letter-spacing: 1px;
+}
+
+.block-heading {
+    font-size: 1.18em;
+    font-weight: 700;
+    margin: 0 0 12px 0;
+    padding: 6px 0 6px 8px;
+    background: #f0f4fa;
+    border-bottom: 2px solid #1976d2;
+    border-radius: 6px 6px 0 0;
+    color: #1976d2;
+    letter-spacing: 0.5px;
+}
+
+.sticky-form {
+    position: sticky;
+    top: 2.7em;
+    z-index: 99;
+    background: #fff;
+    padding-bottom: 8px;
+    box-shadow: 0 2px 8px rgba(25,118,210,0.04);
+    margin-top: 0;
+}
+
+.left-panel > * {
+    margin-top: 20px;
+    margin-bottom: 0;
+}
+
+@media (max-width: 900px) {
+    .left-panel > * {
+        margin-top: 14px;
+    }
+    .section-heading {
+        font-size: 1.08em;
+        padding: 8px;
+    }
+    .table-container {
+        max-height: 200px;
     }
 } 
