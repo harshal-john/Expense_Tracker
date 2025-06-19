@@ -16,21 +16,104 @@ const totalByCategoryDiv = document.getElementById('total-by-category');
 const monthlySummaryDiv = document.getElementById('monthly-summary');
 const averageDailyDiv = document.getElementById('average-daily');
 
+// --- File Management Logic ---
+const uploadFileInput = document.getElementById('upload-file');
+const uploadBtn = document.getElementById('upload-btn');
+const exportBtn = document.getElementById('export-btn');
+const fileMsg = document.getElementById('file-message');
+
+// Load expenses from localStorage on app start
+window.addEventListener('DOMContentLoaded', () => {
+    const saved = localStorage.getItem('expenses');
+    if (saved) {
+        try {
+            expenses = JSON.parse(saved);
+            applyFiltersAndSort();
+            fileMsg.textContent = `Loaded ${expenses.length} entries from local storage.`;
+            fileMsg.style.color = '#388e3c';
+        } catch (e) {
+            expenses = [];
+        }
+    }
+});
+
+// Upload/merge new txt/xlsx file
+uploadBtn.addEventListener('click', async () => {
+    const file = uploadFileInput.files[0];
+    if (!file) {
+        fileMsg.textContent = 'Please select a .txt or .xlsx file to upload.';
+        fileMsg.style.color = '#e53935';
+        return;
+    }
+    const ext = file.name.split('.').pop().toLowerCase();
+    let added = 0;
+    if (ext === 'txt') {
+        const text = await file.text();
+        const lines = text.split(/\r?\n/);
+        for (const line of lines) {
+            if (!line.trim()) continue;
+            const parts = line.split(',');
+            if (parts.length !== 3) continue;
+            const cat = parts[0].trim();
+            const amt = parseFloat(parts[1].trim());
+            if (isNaN(amt) || amt < 0) continue;
+            let date = parts[2].trim();
+            if (!/^\d{4}-\d{2}-\d{2}$/.test(date)) date = new Date().toISOString().slice(0,10);
+            expenses.push({ category: cat, amount: amt, date });
+            added++;
+        }
+    } else if (ext === 'xlsx') {
+        if (typeof XLSX === 'undefined') {
+            fileMsg.textContent = 'Excel upload requires SheetJS (XLSX) library.';
+            fileMsg.style.color = '#e53935';
+            return;
+        }
+        const data = await file.arrayBuffer();
+        const workbook = XLSX.read(data, { type: 'array' });
+        const sheet = workbook.Sheets[workbook.SheetNames[0]];
+        const rows = XLSX.utils.sheet_to_json(sheet, { header: 1 });
+        for (let i = 1; i < rows.length; i++) { // skip header
+            const row = rows[i];
+            if (!row || row.length < 3) continue;
+            const cat = (row[0] || '').toString().trim();
+            const amt = parseFloat(row[1]);
+            if (isNaN(amt) || amt < 0) continue;
+            let date = (row[2] || '').toString().trim();
+            if (!/^\d{4}-\d{2}-\d{2}$/.test(date)) date = new Date().toISOString().slice(0,10);
+            expenses.push({ category: cat, amount: amt, date });
+            added++;
+        }
+    } else {
+        fileMsg.textContent = 'Unsupported file type.';
+        fileMsg.style.color = '#e53935';
+        return;
+    }
+    fileMsg.textContent = `Merged ${added} entr${added === 1 ? 'y' : 'ies'} from upload.`;
+    fileMsg.style.color = '#388e3c';
+    uploadFileInput.value = '';
+    localStorage.setItem('expenses', JSON.stringify(expenses));
+    applyFiltersAndSort();
+});
+
+// Export current expenses as expense.txt
+exportBtn.addEventListener('click', () => {
+    const lines = expenses.map(e => `${e.category},${e.amount},${e.date}`);
+    const blob = new Blob([lines.join('\n')], { type: 'text/plain' });
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'expense.txt';
+    a.click();
+});
+
 form.addEventListener('submit', function(e) {
     e.preventDefault();
     const category = document.getElementById('category').value.trim();
     const amount = parseFloat(document.getElementById('amount').value);
     const date = document.getElementById('date').value;
     if (!category || isNaN(amount) || !date) return;
-    const expense = { category, amount: parseFloat(amount.toFixed(2)), date };
-    if (editingIndex !== null) {
-        expenses[editingIndex] = expense;
-        editingIndex = null;
-        form.querySelector('button[type="submit"]').textContent = 'Add Expense';
-    } else {
-        expenses.push(expense);
-    }
+    expenses.push({ category, amount: parseFloat(amount.toFixed(2)), date });
     form.reset();
+    localStorage.setItem('expenses', JSON.stringify(expenses));
     applyFiltersAndSort();
 });
 
@@ -152,5 +235,4 @@ function updateAnalytics() {
     }
 }
 
-// Initial render
-applyFiltersAndSort(); 
+// No backend: user must load or upload a file to start 

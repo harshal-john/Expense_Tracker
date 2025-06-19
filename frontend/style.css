@@ -6,7 +6,7 @@ body {
 }
 
 .container {
-    max-width: 400px;
+    max-width: 1000px;
     margin: 40px auto;
     background: #fff;
     border-radius: 10px;
@@ -129,5 +129,103 @@ tr:nth-child(even) {
     .analytics {
         font-size: 0.95rem;
         padding: 6px 2vw;
+    }
+}
+
+.upload-section {
+    margin: 24px 0 12px 0;
+    padding: 14px 10px;
+    background: #f7fafd;
+    border-radius: 8px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.03);
+    text-align: center;
+}
+.upload-section h2 {
+    font-size: 1.1em;
+    margin-bottom: 10px;
+    color: #1976d2;
+}
+#upload-message {
+    margin-top: 8px;
+    font-size: 0.98em;
+    color: #388e3c;
+}
+
+.file-section {
+    margin: 24px 0 12px 0;
+    padding: 14px 10px;
+    background: #f7fafd;
+    border-radius: 8px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.03);
+    text-align: center;
+}
+.file-section h2 {
+    font-size: 1.1em;
+    margin-bottom: 10px;
+    color: #1976d2;
+}
+#file-message {
+    margin-top: 8px;
+    font-size: 0.98em;
+    color: #388e3c;
+}
+
+.main-content {
+    display: flex;
+    gap: 32px;
+    min-height: 600px;
+}
+
+.left-panel {
+    flex: 1 1 320px;
+    max-width: 350px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.right-panel {
+    flex: 2 1 0;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    max-height: 700px;
+}
+
+.right-panel table {
+    flex: 1 1 auto;
+    overflow-y: auto;
+    display: block;
+    max-height: 650px;
+}
+
+.right-panel thead, .right-panel tbody {
+    display: block;
+}
+
+.right-panel tbody {
+    overflow-y: auto;
+    max-height: 600px;
+}
+
+.right-panel th, .right-panel td {
+    width: 150px;
+    box-sizing: border-box;
+}
+
+@media (max-width: 900px) {
+    .main-content {
+        flex-direction: column;
+        gap: 16px;
+    }
+    .left-panel, .right-panel {
+        max-width: 100%;
+    }
+    .right-panel table, .right-panel thead, .right-panel tbody, .right-panel th, .right-panel td {
+        display: block;
+        width: 100%;
+    }
+    .right-panel tbody {
+        max-height: 300px;
     }
 } 

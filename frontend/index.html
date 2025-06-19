@@ -9,47 +9,60 @@
 <body>
     <div class="container">
         <h1>Expense Tracker</h1>
-        <form id="expense-form">
-            <input type="text" id="category" placeholder="Category" required>
-            <input type="number" id="amount" placeholder="Amount" min="0" step="0.01" required>
-            <input type="date" id="date" required>
-            <button type="submit">Add Expense</button>
-        </form>
-        <div class="controls">
-            <select id="sort-select">
-                <option value="date-asc">Sort by Date (Oldest)</option>
-                <option value="date-desc">Sort by Date (Newest)</option>
-                <option value="amount-asc">Sort by Amount (Low-High)</option>
-                <option value="amount-desc">Sort by Amount (High-Low)</option>
-                <option value="category">Sort by Category</option>
-                <option value="category-date">Sort by Category, then Date</option>
-            </select>
-            <input type="text" id="filter-category" placeholder="Filter by Category">
-            <input type="month" id="filter-month" placeholder="Filter by Month">
-            <input type="number" id="filter-min" placeholder="Min Amount" min="0" step="0.01">
-            <input type="number" id="filter-max" placeholder="Max Amount" min="0" step="0.01">
-            <button id="apply-filters" type="button">Apply Filters</button>
-            <button id="clear-filters" type="button">Clear Filters</button>
+        <div class="main-content">
+            <div class="left-panel">
+                <form id="expense-form">
+                    <input type="text" id="category" placeholder="Category" required>
+                    <input type="number" id="amount" placeholder="Amount" min="0" step="0.01" required>
+                    <input type="date" id="date" required>
+                    <button type="submit">Add Expense</button>
+                </form>
+                <div class="controls">
+                    <select id="sort-select">
+                        <option value="date-asc">Sort by Date (Oldest)</option>
+                        <option value="date-desc">Sort by Date (Newest)</option>
+                        <option value="amount-asc">Sort by Amount (Low-High)</option>
+                        <option value="amount-desc">Sort by Amount (High-Low)</option>
+                        <option value="category">Sort by Category</option>
+                        <option value="category-date">Sort by Category, then Date</option>
+                    </select>
+                    <input type="text" id="filter-category" placeholder="Filter by Category">
+                    <input type="month" id="filter-month" placeholder="Filter by Month">
+                    <input type="number" id="filter-min" placeholder="Min Amount" min="0" step="0.01">
+                    <input type="number" id="filter-max" placeholder="Max Amount" min="0" step="0.01">
+                    <button id="apply-filters" type="button">Apply Filters</button>
+                    <button id="clear-filters" type="button">Clear Filters</button>
+                </div>
+                <div class="analytics">
+                    <div id="total-amount"></div>
+                    <div id="total-by-category"></div>
+                    <div id="monthly-summary"></div>
+                    <div id="average-daily"></div>
+                </div>
+                <div class="file-section">
+                    <h2>Expense File Upload & Export</h2>
+                    <input type="file" id="upload-file" accept=".txt,.xlsx">
+                    <button id="upload-btn" type="button">Upload & Merge</button>
+                    <button id="export-btn" type="button">Export expense.txt</button>
+                    <div id="file-message"></div>
+                </div>
+            </div>
+            <div class="right-panel">
+                <table id="expenses-table">
+                    <thead>
+                        <tr>
+                            <th>Category</th>
+                            <th>Amount</th>
+                            <th>Date</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Expenses will be inserted here -->
+                    </tbody>
+                </table>
+            </div>
         </div>
-        <div class="analytics">
-            <div id="total-amount"></div>
-            <div id="total-by-category"></div>
-            <div id="monthly-summary"></div>
-            <div id="average-daily"></div>
-        </div>
-        <table id="expenses-table">
-            <thead>
-                <tr>
-                    <th>Category</th>
-                    <th>Amount</th>
-                    <th>Date</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- Expenses will be inserted here -->
-            </tbody>
-        </table>
     </div>
     <script src="script.js"></script>
 </body>
