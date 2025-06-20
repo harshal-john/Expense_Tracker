@@ -1,113 +1,185 @@
-# 💸 Expense Tracker (JavaFX MVC Refactor)
+# 💸 Expense Tracker
 
-**Note:** This project is being refactored to use JavaFX with an MVC structure. The main entry point will move to a JavaFX Application class in the controllers package.
+A modern expense tracking application with a **web-based frontend** and **Java backend** classes.
+Track your daily expenses with a beautiful, responsive interface and robust file-based persistence.
 
-A beginner-friendly Java project to help you track your daily expenses, categorized and saved to a text file. Built with core Java features like `ArrayList`, `LocalDate`, file I/O, and method overloading.
+---
+
+## 🗺️ Table of Contents
+
+* [Features](#-features)
+* [Project Structure](#-project-structure)
+* [Technology Stack](#-technology-stack)
+* [How to Run](#-how-to-run)
+* [Data Format](#-data-format)
+* [User Interface Features](#-user-interface-features)
+* [Future Enhancements](#-future-enhancements)
+* [Author](#-author)
+* [License](#-license)
 
 ---
 
 ## 📌 Features
 
-- ✅ Add expenses with optional category and date
-- ✅ View all recorded expenses
-- ✅ Calculate total spent in a category
-- ✅ Filter expenses by month
-- ✅ Save & load data from a `.txt` file
-- ✅ Handles default values for category and date
-- ✅ Unicode ₹ symbol support for Indian currency
+### **Core Functionality**
+
+* ✅ Add Expenses — Add new expenses with category, amount, and date
+* ✅ Edit & Delete — Modify or remove existing expense entries
+* ✅ View All Expenses — Display expenses in a clean, sortable table
+* ✅ Real‑time Analytics — Totals, category breakdown, and monthly summaries
+
+### **Advanced Features**
+
+* ✅ Multiple Sort Options — Date, Amount, Category, and Category + Date
+* ✅ Advanced Filtering — Category, Month, Amount Range
+* ✅ File Management — Upload, merge, and export expense files
+* ✅ Local Storage — Browser‑based persistence for offline access
+* ✅ Responsive Design — Works beautifully across desktop and mobile
+
+### **Data Persistence**
+
+* ✅ File‑based Storage — Save expenses to `expense.txt` in **CSV** format
+* ✅ Excel Support — Import `.xlsx` files via [SheetJS](https://sheetjs.com/)
+* ✅ Auto‑save — Automatic save to browser `localStorage`
+* ✅ Export Functionality — Export your data as `expense.txt`
 
 ---
 
-## 📁 File Structure
+## 📁 Project Structure
 
 ```
-ExpenseTracker/
-│
-├── ExpenseTracker.java        // Main program (console menu)
-├── ExpenseManager.java        // Handles expense operations
-├── Expense.java               // Data class for individual expense entries
-├── expense.txt                // Saved expenses (auto-created if not found)
-├── README.md                  // Project documentation (this file)
+Expense_Tracker/
+├── frontend/
+│   ├── index.html            # Main web interface
+│   ├── style.css             # Modern, responsive styling
+│   └── script.js             # Frontend logic and interactions
+├── models/
+│   ├── Expense.java          # Expense data class
+│   └── ExpenseManager.java   # Business logic and file I/O
+└── README.md                # Project documentation
 ```
 
 ---
 
-## 🧠 Concepts Used
+## ⚡️ Technology Stack
 
-- Object-Oriented Programming (OOP)
-- Constructor overloading & encapsulation
-- Java Collections (`ArrayList`)
-- File Handling (`BufferedReader`, `BufferedWriter`)
-- Date API (`java.time.LocalDate`)
-- Exception Handling
-- Unicode formatting (₹ symbol)
+* **Backend**: Java 8
+* **Frontend**: HTML5, CSS3, JavaScript
+* **Storage**: File I/O (.txt), Local Storage (browser), Excel (.xlsx via SheetJS)
 
 ---
 
 ## 🚀 How to Run
 
-1. **Clone this repository:**
+### 🌐 Web Interface (Recommended)
+
+1. **Open the frontend:**
+
    ```bash
-   git clone https://github.com/your-username/ExpenseTracker.git
-   cd ExpenseTracker
+   cd frontend
+   # Open index.html in your browser
+   # OR serve it with a local server:
+   python -m http.server 8000
    ```
 
-2. **Compile the Java files:**
-   ```bash
-   javac ExpenseTracker.java ExpenseManager.java Expense.java
-   ```
+   Then visit **[http://localhost:8000](http://localhost:8000)**.
 
-3. **Run the app:**
-   ```bash
-   java ExpenseTracker
-   ```
+2. **Start Tracking Expenses:**
 
-> 💡 All expenses are saved to `expense.txt` in the project directory.
+   * Add expenses via the form
+   * Use filters/sorting
+   * Upload existing `.txt` files
+   * Export data when needed
 
 ---
 
-## ✍️ Expense Format (in expense.txt)
+### ☕️ Java Backend (For Development)
+
+1. **Compile Java classes:**
+
+   ```bash
+   javac models/*.java
+   ```
+2. **Use in your Java projects:**
+
+   ```java
+   import models.Expense;
+   import models.ExpenseManager;
+
+   ExpenseManager manager = new ExpenseManager();
+   manager.loadFromFile("expense.txt");
+   // Add your custom logic here
+   ```
+
+---
+
+## 🗂️ Data Format
 
 Each expense is stored as:
+
 ```
 Category,Amount,Date
 ```
 
-Example:
+### **Example Entries**
+
 ```
-Food,150.0,2025-06-17
-Transport,100.0,2025-06-16
+Food,150.50,2024-01-15
+Transport,75.25,2024-01-16
+Entertainment,200.00,2024-01-17
 ```
+
+### **Default Values**
+
+* Category: `Miscellaneous`
+* Date: Current Date
+* Amount: Must be a positive number
 
 ---
 
-## ⚠️ Notes
+## 🎨 User Interface Features
 
-- Negative amounts are rejected with an error.
-- If no category is entered, defaults to `"Miscellaneous"`.
-- If no date is entered, defaults to `LocalDate.now()` (today).
-- Uses Unicode ₹ (U+20B9) for currency — if it shows as `?`, your terminal font may not support it.
+* ✅ **Dashboard** — Real‑time totals, category‑wise analytics
+* ✅ **Modern Layout** — Responsive across mobile, tablet, and desktop
+* ✅ **Sticky Add Expense Form** — Always available for quick entry
+* ✅ **Advanced Filters** — Category, date range, and amount range
+* ✅ **File Operations** — Drag‑and‑drop upload, merging, and downloading files
+* ✅ **Keyboard Navigation** — Fully accessible interface
 
 ---
 
-## 🛠️ Future Improvements
+## 🛠️ Future Enhancements
 
-- [ ] Edit or delete expenses
-- [ ] Monthly summary report
-- [ ] GUI version using JavaFX or Swing
-- [ ] JSON/CSV export
-- [ ] Auto-save after every entry
+* ☁️ **Cloud Sync** — Backend server for data synchronization
+* 👥 **User Accounts** — Multiple user profiles and authentication
+* 📈 **Detailed Reports** — Charts and graphs for deeper analytics
+* 💰 **Budget Tracking** — Set and track category‑wise or total monthly limits
+* 🖼️ **Receipt Upload** — Image uploads and OCR for receipts
+* 📱 **Native Mobile App** — Build mobile app for Expense Tracker
 
 ---
 
 ## 👨‍💻 Author
 
-Harshal John V  
-Student at Loyola-ICAM College of Engineering and Technology  
-Passionate about Java, software development, and building real-world apps
+**Harshal John V**
+Student, Loyola‑ICAM College of Engineering and Technology
+Passionate about Java, software development, and building real‑world applications.
+
+**Email**: [your-email@example.com](mailto:your-email@example.com)
+**LinkedIn**: [Your LinkedIn Profile](https://www.linkedin.com/in/...)
 
 ---
 
 ## 📄 License
 
-This project is open-source and free to use under the [MIT License](LICENSE).
+This project is open‑source and available under the [MIT License](LICENSE).
+
+---
+
+If you want, I can also help you:
+
+✅ Export this as a `.md` file
+✅ Add a Demo Screenshot
+✅ Create Badges (build status, license, etc.)
+
+Would you like any of those? Let me know! 👏🎉
